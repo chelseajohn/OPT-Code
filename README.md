@@ -9,7 +9,7 @@ the [Meta OPT codebase](https://github.com/facebookresearch/metaseq.git).
 - Clone this repository
 - execute 
 ```
-nice bash set_up.bash
+nice bash setup.bash
 source activate.bash
 ```
 # Start Training 
