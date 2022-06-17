@@ -10,7 +10,7 @@ the [Meta OPT codebase](https://github.com/facebookresearch/metaseq.git).
 - execute 
 ```
 nice bash set_up.bash
-source activate.sh
+source activate.bash
 ```
 # Start Training 
 
