@@ -1,24 +1,9 @@
-srun --jobid="$SLURM_JOBID" opt-baselines \
---account opengptx-elm \
---partition booster \
--n 4 -g 4 \
---cpus-per-task 1  \
---ntasks-per-node 1 \
---prefix test125m \
---model-size 125m \
---juwelsbooster \
---checkpoints-dir "$ROOT_OUTPUT_DIR"/checkpoints/ \
---tensorboard-logdir "$ROOT_OUTPUT_DIR"/tensorboard/ \
---data "$DATA_PATH" \
---no-save-dir \
---snapshot-root "$ROOT_OUTPUT_DIR" \
---time 15 \
---salloc  
+ 
 
 opt-baselines -n 4 -g 4  \
     --account opengptx-elm \
     --partition booster \
-    --prefix opt125m_3 \
+    --prefix opt125m_1 \
     --model-size 125m \
     --juwelsbooster \
     --data "$DATA_PATH" \
@@ -29,13 +14,24 @@ opt-baselines -n 4 -g 4  \
     --no-save-dir \
     --snapshot-root "$ROOT_OUTPUT_DIR" \
     --time 10  \
-    --no-wandb
+    --no-wandb \
+    --salloc
+
+
+
 
 
 --dataset-impl mmap \
 --log-file "$ROOT_OUTPUT_DIR"/metric_log \
 --final-vocab-size 50257 
 
+# IFS='
+# '
+# for addr in $MASTER_ADDR
+# do
+
+#   MASTER_ADDR+="${addr}i " 
+# done
 
  
 
