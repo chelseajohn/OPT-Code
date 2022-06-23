@@ -9,7 +9,9 @@ set -euo pipefail
 
 
 module purge
-module load Stages/2022 GCC CMake Ninja git Python PyTorch CUDA libaio cuDNN NCCL torchvision torchaudio
+module load Stages/2020 GCC CMake Ninja git Python libaio 
+# With PyTorch 1.11 need CUDA/11.3 and NCCL
+module load cuDNN NCCL
 
 source variables.bash
 
@@ -21,7 +23,7 @@ mkdir -p "$(dirname "$MEGATRON_LM_REPO")"
 mkdir -p "$(dirname "$FAIRSCALE_REPO")"
 mkdir -p "$ROOT_OUTPUT_DIR"
 
-export CUDA_VISIBLE_DEVICES=0,1,2,3
+export CUDA_VISIBLE_DEVICES=0
 
 [ -d "$VENV_DIR" ] || python -m venv --prompt opt_env --system-site-packages "$VENV_DIR"
 
@@ -30,6 +32,11 @@ source activate.bash
 
 python -m pip install --upgrade pip
 
+#Installing PyTorch 1.10.1 version with cuda 11.3 used by metaseq
+# python -m pip install torch==1.10.1+cu113 torchvision==0.11.2+cu113 torchaudio==0.10.1+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+
+# Installing PyTorch 1.11 version with cuda 11.3
+python -m pip install torch==1.11.0+cu113 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
 
 # Following from here on the metaseq setup instructions at
 # https://github.com/facebookresearch/metaseq/blob/main/docs/setup.md
@@ -64,6 +71,7 @@ echo 'APEX Installation Complete!'
         "$MEGATRON_LM_REPO"
 
 cd "$MEGATRON_LM_REPO"
+python -m pip install six regex
 python -m pip install -e . | tee build.log
 cd ..
 

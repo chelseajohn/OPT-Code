@@ -3,7 +3,9 @@
 [ -x "$(command -v deactivate)" ] && deactivate
 
 module purge
-module load Stages/2022 GCC CMake Ninja git Python PyTorch CUDA libaio cuDNN NCCL torchvision torchaudio
+module load Stages/2020 GCC CMake Ninja git Python libaio 
+# With PyTorch 1.11 need CUDA/11.3 and NCCL
+module load cuDNN NCCL
 
 source variables.bash
 
