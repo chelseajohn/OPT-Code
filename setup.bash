@@ -15,6 +15,7 @@ module load cuDNN NCCL
 
 source variables.bash
 
+mkdir -p slurmLog
 mkdir -p "$ROOT_DIR"
 mkdir -p "$(dirname "$VENV_DIR")"
 mkdir -p "$(dirname "$METASEQ_REPO")"
