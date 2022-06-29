@@ -24,9 +24,9 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 
 opt-baselines -n "$SLURM_NNODES" -g 4  \
     --account opengptx-elm \
-    --partition booster \
+    --partition booster \            # develbooster or booster
     --prefix "$SLURM_JOB_NAME" \
-    --model-size 30b \
+    --model-size 30b \               # change the model size ( take a look at the OPT/metaseq/metaseq/launcher/opt_job_constants.py)
     --juwelsbooster \
     --data "$DATA_PATH" \
     --ntasks-per-node 4 \
@@ -35,7 +35,7 @@ opt-baselines -n "$SLURM_NNODES" -g 4  \
     --tensorboard-logdir "$TENSORBOARD_PATH" \
     --no-save-dir \
     --snapshot-root "$ROOT_OUTPUT_DIR" \
-    --time 10  \
+    --time 10  \                    # time in minutes
     --no-wandb \
     --cpu-bind socket \
     --salloc
